@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRIDGES - Baryon Recycling In Dwarf Galaxies Emission Survey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: linear-gradient(135deg, #0c1445 0%, #1a1a2e 50%, #16213e 100%);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(12, 20, 69, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #64b5f6;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #64b5f6;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #64b5f6, #90caf9, #e3f2fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        /* Main Visual Section */
+        .visual-section {
+            position: relative;
+            height: 800vh; /* 8x viewport height for scroll effect with 5 layers */
+        }
+
+        .graphic-container {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .cgm-graphic {
+            position: relative;
+            width: 120vw;
+            height: 120vh;
+            max-width: none;
+            max-height: none;
+            margin-left: -10vw; /* Center the oversized graphic */
+            margin-top: -10vh;
+        }
+
+        .layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease, transform 1s ease;
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* Galaxy layer */
+        .layer-galaxy {
+            background-image: url('baryon_cycle_galaxy.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 65% 80%;
+        }
+
+        /* Recycling layer */
+        .layer-recycling {
+            background-image: url('baryon_cycle_recycling.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 65% 80%;
+        }
+
+        /* Outflow layer */
+        .layer-outflow {
+            background-image: url('baryon_cycle_outflows.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 65% 80%;
+        }
+
+        /* CGM layer */
+        .layer-cgm {
+            background-image: url('baryon_cycle_cgm.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 65% 80%;
+        }
+
+        /* Inflow layer */
+        .layer-inflow {
+            background-image: url('baryon_cycle_inflows.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 65% 80%;
+        } 
+
+        .layer.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Information Panels */
+        .info-panel {
+            position: fixed;
+            right: -450px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 450px;
+            height:500px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: right 0.8s ease;
+            z-index: 100;
+        }
+
+        .info-panel.visible {
+            right: 2rem;
+        }
+
+        .info-panel h3 {
+            color: #64b5f6;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .info-panel p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Survey Description Section */
+        .survey-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .survey-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #64b5f6;
+        }
+
+        .survey-section p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .goal-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .goal-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .goal-card h3 {
+            color: #90caf9;
+            margin-bottom: 1rem;
+        }
+
+        /* Animations */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .info-panel {
+                width: 280px;
+                padding: 1.5rem;
+            }
+            
+            .cgm-graphic {
+                width: 100vw;
+                height: 100vh;
+                margin-left: 0;
+                margin-top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#" class="logo">BRIDGES</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#survey">Survey</a></li>
+                <li><a href="#data">Data</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>BRIDGES</h1>
+            <p><strong>B</strong>aryon <strong>R</strong>ecycling <strong>I</strong>n <strong>D</strong>warf <strong>G</strong>alaxies <strong>E</strong>mission <strong>S</strong>urvey</p>
+
+        </div>
+        <div class="scroll-indicator">
+            <div style="color: #64b5f6; font-size: 2rem;">↓</div>
+        </div>
+    </section>
+
+    <!-- Main Visual Section -->
+    <section class="visual-section">
+        <div class="graphic-container">
+            <div class="cgm-graphic">
+                <div class="layer layer-galaxy" id="layer-galaxy"></div>
+                <div class="layer layer-recycling" id="layer-recycling"></div>
+                <div class="layer layer-outflow" id="layer-outflow"></div>
+                <div class="layer layer-cgm" id="layer-cgm"></div>
+                <div class="layer layer-inflow" id="layer-inflow"></div>
+            </div>
+        </div>
+
+        <!-- Information Panels -->
+        <div class="info-panel" id="panel-galaxy">
+            <h3>Dwarf Galaxy</h3>
+            <p>The central stellar component of dwarf galaxies, where star formation occurs and stellar feedback originates.</p>
+            <p>BRIDGES targets the circumgalactic medium around these low-mass systems to understand baryon cycling.</p>
+        </div>
+
+        <div class="info-panel" id="panel-recycling">
+            <h3>Gas Recycling</h3>
+            <p>The complex process by which gas is expelled from the galaxy and later re-accreted, enriching the circumgalactic medium.</p>
+            <p>This recycling process is fundamental to understanding how dwarf galaxies evolve over cosmic time.</p>
+        </div>
+
+        <div class="info-panel" id="panel-outflow">
+            <h3>Stellar Feedback Outflows</h3>
+            <p>Hot, metal-enriched gas driven out by supernovae and stellar winds from the central galaxy.</p>
+            <p>These outflows redistribute metals and regulate star formation efficiency.</p>
+        </div>
+
+        <div class="info-panel" id="panel-cgm">
+            <h3>Circumgalactic Medium</h3>
+            <p>The extended gaseous atmosphere surrounding the galaxy, containing a significant fraction of the halo's baryons.</p>
+            <p>The CGM serves as the interface between the galaxy and the cosmic web, mediating gas flows.</p>
+        </div>
+
+        <div class="info-panel" id="panel-inflow">
+            <h3>Pristine Gas Inflows</h3>
+            <p>Cold, metal-poor gas streams feeding the galaxy from the cosmic web and intergalactic medium.</p>
+            <p>These inflows provide the raw material for continued star formation in dwarf systems.</p>
+        </div>
+    </section>
+
+    <!-- Survey Description -->
+    <section class="survey-section" id="survey">
+        <h2>About the BRIDGES Survey</h2>
+        <p>
+            The BRIDGES survey represents a comprehensive observational campaign to map and characterize the circumgalactic medium (CGM) around dwarf galaxies. By studying these low-mass systems, we gain crucial insights into the fundamental processes that govern baryon cycling in the universe.
+        </p>
+        <p>
+            Dwarf galaxies serve as ideal laboratories for understanding feedback mechanisms because their shallow potential wells make them highly sensitive to stellar feedback processes. The interplay between gas inflows, star formation, and outflows in these systems provides a window into the physics that shaped galaxy evolution throughout cosmic time.
+        </p>
+        <p>
+            Using multi-wavelength observations spanning from UV to radio wavelengths, BRIDGES traces the complete baryon cycle: from pristine gas accretion through star formation to metal-enriched outflows and the eventual recycling of processed material back into the galaxy.
+        </p>
+
+        <div class="goals-grid">
+            <div class="goal-card">
+                <h3>Map CGM Structure</h3>
+                <p>Characterize the spatial distribution and kinematics of gas around dwarf galaxies using absorption line spectroscopy and emission mapping.</p>
+            </div>
+            <div class="goal-card">
+                <h3>Quantify Baryon Budget</h3>
+                <p>Measure the mass and metallicity of gas in different phases to understand how efficiently dwarf galaxies retain their baryons.</p>
+            </div>
+            <div class="goal-card">
+                <h3>Constrain Feedback Models</h3>
+                <p>Provide observational benchmarks for theoretical models of stellar feedback and its impact on galaxy evolution.</p>
+            </div>
+            <div class="goal-card">
+                <h3>Cosmic Context</h3>
+                <p>Connect dwarf galaxy observations to broader questions about reionization, chemical evolution, and structure formation.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Intersection Observer for scroll-triggered animations
+        const layers = [
+            { element: document.getElementById('layer-galaxy'), panel: document.getElementById('panel-galaxy') },
+            { element: document.getElementById('layer-recycling'), panel: document.getElementById('panel-recycling') },
+            { element: document.getElementById('layer-outflow'), panel: document.getElementById('panel-outflow') },
+            { element: document.getElementById('layer-cgm'), panel: document.getElementById('panel-cgm') },
+            { element: document.getElementById('layer-inflow'), panel: document.getElementById('panel-inflow') }
+        ];
+
+        // Create trigger points for each layer
+        const triggers = [];
+        for (let i = 0; i < layers.length; i++) {
+            const trigger = document.createElement('div');
+            trigger.style.position = 'absolute';
+            trigger.style.top = `${(i + 1) * 18}%`; // 18% spacing to use more of the 800vh space
+            trigger.style.height = '10px';
+            trigger.style.width = '100%';
+            trigger.classList.add('trigger');
+            trigger.dataset.layerIndex = i;
+            document.querySelector('.visual-section').appendChild(trigger);
+            triggers.push(trigger);
+        }
+
+        // Intersection Observer setup
+        const observerOptions = {
+            root: null,
+            rootMargin: '-10% 0px -10% 0px', // Tighter margins for better reverse detection
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const layerIndex = parseInt(entry.target.dataset.layerIndex);
+                const layer = layers[layerIndex];
+                
+                if (entry.isIntersecting) {
+                    // Show layer and panel
+                    layer.element.classList.add('visible');
+                    
+                    // Hide all other panels
+                    layers.forEach((l, index) => {
+                        if (index !== layerIndex) {
+                            l.panel.classList.remove('visible');
+                        }
+                    });
+                    
+                    // Show current panel after a brief delay
+                    setTimeout(() => {
+                        layer.panel.classList.add('visible');
+                    }, 300);
+                }
+            });
+        }, observerOptions);
+
+        // Additional observer for reverse scrolling
+        const reverseObserverOptions = {
+            root: null,
+            rootMargin: '50% 0px 50% 0px', // Larger margins to catch reverse movement
+            threshold: 0
+        };
+
+        const reverseObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const layerIndex = parseInt(entry.target.dataset.layerIndex);
+                const layer = layers[layerIndex];
+                
+                if (!entry.isIntersecting) {
+                    // Check if we've scrolled past this trigger going up
+                    const triggerRect = entry.target.getBoundingClientRect();
+                    
+                    // If trigger is well below viewport, hide this layer
+                    if (triggerRect.top > window.innerHeight + 100) {
+                        layer.element.classList.remove('visible');
+                        layer.panel.classList.remove('visible');
+                    }
+                }
+            });
+        }, reverseObserverOptions);
+
+        // Create additional trigger for clearing panels when leaving visual section
+        const endTrigger = document.createElement('div');
+        endTrigger.style.position = 'absolute';
+        endTrigger.style.top = '95%';
+        endTrigger.style.height = '5%';
+        endTrigger.style.width = '100%';
+        document.querySelector('.visual-section').appendChild(endTrigger);
+
+        const endObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    // Hide all panels when leaving the visual section
+                    layers.forEach(layer => {
+                        layer.panel.classList.remove('visible');
+                    });
+                }
+            });
+        }, { threshold: 0 });
+
+        // Observe all trigger points with both observers
+        triggers.forEach(trigger => {
+            observer.observe(trigger);
+            reverseObserver.observe(trigger);
+        });
+
+        // Observe the end trigger
+        endObserver.observe(endTrigger);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
