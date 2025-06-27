@@ -12,10 +12,10 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             line-height: 1.6;
             color: #e0e0e0;
-            background: linear-gradient(135deg, #0c1445 0%, #1a1a2e 50%, #16213e 100%);
+            background: #233c55d2;
             overflow-x: hidden;
         }
 
@@ -24,7 +24,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(12, 20, 69, 0.95);
+            background: #9b95c2ab;
             backdrop-filter: blur(10px);
             padding: 1rem 2rem;
             z-index: 1000;
@@ -42,7 +42,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #64b5f6;
+            color: #233c55;
             text-decoration: none;
         }
 
@@ -53,13 +53,13 @@
         }
 
         .nav-links a {
-            color: #e0e0e0;
+            color: #d2defc;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: #64b5f6;
+            color: #233c55;
         }
 
         /* Hero Section */
@@ -73,18 +73,22 @@
         }
 
         .hero-content h1 {
-            font-size: 4.5rem;
+            font-size: 10rem;
             margin-bottom: 1rem;
-            background: linear-gradient(45deg, #64b5f6, #90caf9, #e3f2fd);
+            background: linear-gradient(20deg,#9eaed8,#9b95c2,#E8C9EB);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .hero-content p {
-            font-size: 1.3rem;
+            font-size: 2rem;
             margin-bottom: 2rem;
-            opacity: 0.8;
+            opacity: 1;
+            background: linear-gradient(20deg,#9eaed8,#9b95c2,#E8C9EB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .scroll-indicator {
@@ -95,10 +99,10 @@
             animation: bounce 2s infinite;
         }
 
-        /* Main Visual Section */
+        /* Main Visual Section - Reduced height */
         .visual-section {
             position: relative;
-            height: 800vh; /* 8x viewport height for scroll effect with 5 layers */
+            height: 500vh; /* Reduced from 800vh */
         }
 
         .graphic-container {
@@ -178,27 +182,27 @@
             background-repeat: no-repeat;
             background-position: 65% 80%;
         } 
-
         .layer.visible {
             opacity: 1;
             transform: scale(1);
         }
 
-        /* Information Panels */
+        /* Improved Information Panels */
         .info-panel {
             position: fixed;
-            right: -450px;
+            right: -400px; /* Slightly smaller for smoother animation */
             top: 50%;
             transform: translateY(-50%);
-            width: 450px;
-            height:500px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
+            width: 380px;
+            height: 450px;
+            background: #233c55d2;
+            backdrop-filter: blur(15px);
             padding: 2rem;
             border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: right 0.8s ease;
+            border: 1px solid rgba(100, 181, 246, 0.3);
+            transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother easing */
             z-index: 100;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .info-panel.visible {
@@ -206,14 +210,17 @@
         }
 
         .info-panel h3 {
-            color: #64b5f6;
+            color: #9b95c2;
             margin-bottom: 1rem;
             font-size: 1.4rem;
+            border-bottom: 2px solid #9b95c2b3;
+            padding-bottom: 0.5rem;
         }
 
         .info-panel p {
             margin-bottom: 1rem;
             opacity: 0.9;
+            line-height: 1.6;
         }
 
         /* Survey Description Section */
@@ -221,7 +228,7 @@
             padding: 4rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
-            background: rgba(0, 0, 0, 0.3);
+            background: #233c55d2;
             border-radius: 20px;
             margin-top: 2rem;
             margin-bottom: 2rem;
@@ -231,7 +238,7 @@
             font-size: 2.5rem;
             margin-bottom: 2rem;
             text-align: center;
-            color: #64b5f6;
+            color: #9b95c2;
         }
 
         .survey-section p {
@@ -248,20 +255,69 @@
         }
 
         .goal-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: #4b607678;
             padding: 2rem;
             border-radius: 15px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
         .goal-card:hover {
             transform: translateY(-5px);
+            border-color: #9b95c2;
         }
 
         .goal-card h3 {
-            color: #90caf9;
+            color: #9b95c2;
             margin-bottom: 1rem;
+        }
+
+        /* Sample Section Styles */
+        .sample-section {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 2px solid #9b95c2b3;
+        }
+
+        .sample-section h3 {
+            font-size: 2rem;
+            color: #9b95c2;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .sample-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .sample-item {
+            background: #4b607678;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(100, 181, 246, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .sample-item h4 {
+            color: #9b95c2;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .sample-item p {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.8rem;
+        }
+
+        .sample-detail {
+            font-size: 0.9rem;
+            font-style: italic;
+            line-height: 1.4;
         }
 
         /* Animations */
@@ -290,13 +346,17 @@
             .info-panel {
                 width: 280px;
                 padding: 1.5rem;
+                right: -300px;
+            }
+            
+            .info-panel.visible {
+                right: 1rem;
             }
             
             .cgm-graphic {
-                width: 100vw;
-                height: 100vh;
-                margin-left: 0;
-                margin-top: 0;
+                width: 95vw;
+                height: 85vh;
+                margin: 0 auto;
             }
         }
     </style>
@@ -321,10 +381,9 @@
         <div class="hero-content">
             <h1>BRIDGES</h1>
             <p><strong>B</strong>aryon <strong>R</strong>ecycling <strong>I</strong>n <strong>D</strong>warf <strong>G</strong>alaxies <strong>E</strong>mission <strong>S</strong>urvey</p>
-
         </div>
         <div class="scroll-indicator">
-            <div style="color: #64b5f6; font-size: 2rem;">↓</div>
+            <div style="color: #9b95c2; font-size: 2rem;">↓</div>
         </div>
     </section>
 
@@ -376,37 +435,69 @@
     <section class="survey-section" id="survey">
         <h2>About the BRIDGES Survey</h2>
         <p>
-            The BRIDGES survey represents a comprehensive observational campaign to map and characterize the circumgalactic medium (CGM) around dwarf galaxies. By studying these low-mass systems, we gain crucial insights into the fundamental processes that govern baryon cycling in the universe.
+            An important question regarding galaxy evolution is how galaxies grow and obtain the fuel needed for star formation. Resolved studies of galaxies have provided an understanding of many processes driving the short term evolution of the interstellar medium, such as star formation, feedback, and chemical enrichment. Far less understood is how these processes depend on, and impact, the baryon cycle: the flow of baryons between a galaxy and its circumgalactic medium (CGM). 
+            The CGM contains as much as 50% of a galaxy's baryons and is the interface between star formation processes and a galaxy's gas supply.  It is becoming increasingly clear that the long term evolution of galaxies cannot be robustly constrained without characterizing the complex relationships of these interchanging baryonic reservoirs, and how gas is accreted, used, ejected, and recycled.
         </p>
         <p>
-            Dwarf galaxies serve as ideal laboratories for understanding feedback mechanisms because their shallow potential wells make them highly sensitive to stellar feedback processes. The interplay between gas inflows, star formation, and outflows in these systems provides a window into the physics that shaped galaxy evolution throughout cosmic time.
+            Dwarf galaxies serve as ideal laboratories for understanding the key components of the baryon cycle: their shallow potential wells make them highly sensitive to stellar feedback processes, and we also expect these low mass galaxies to have low virial temperatures, implying the possibility of a CGM rich in cold accretion, in which cool gas efficiently inflows and settles, perhaps explaining the degree to which nearly all isolated dwarf galaxies are actively star forming.
         </p>
         <p>
-            Using multi-wavelength observations spanning from UV to radio wavelengths, BRIDGES traces the complete baryon cycle: from pristine gas accretion through star formation to metal-enriched outflows and the eventual recycling of processed material back into the galaxy.
+            The <strong>B</strong>aryon <strong>R</strong>ecycling <strong>I</strong>n <strong>D</strong>warf <strong>G</strong>alaxies <strong>E</strong>mission <strong>S</strong>urvey survey (BRIDGES) represents a comprehensive observational campaign to map and characterize the baryon cycle and the missing key in these processes -- the CGM -- in dwarf galaxies. With a combination of high resolution IFU data (Keck/KCWI) and wide field of view, low surface brightness narrowband imaging data (Mothra/Dragonfly), BRIDGES traces the complete baryon cycle: from pristine gas accretion through star formation to metal-enriched outflows and the eventual recycling of processed material back into the galaxy.
         </p>
 
         <div class="goals-grid">
             <div class="goal-card">
                 <h3>Map CGM Structure</h3>
-                <p>Characterize the spatial distribution and kinematics of gas around dwarf galaxies using absorption line spectroscopy and emission mapping.</p>
+                <p>Characterize the spatial distribution, ionization, and kinematics of gas around dwarf galaxies using direct emission mapping in Hα, [OIII], and [NII].</p>
             </div>
             <div class="goal-card">
-                <h3>Quantify Baryon Budget</h3>
-                <p>Measure the mass and metallicity of gas in different phases to understand how efficiently dwarf galaxies retain their baryons.</p>
+                <h3>Identify Signatures of Starbursts</h3>
+                <p>Constrain the burstiness of star formation in dwarf galaxies and its impact (or dependence on) the CGM.</p>
             </div>
             <div class="goal-card">
                 <h3>Constrain Feedback Models</h3>
                 <p>Provide observational benchmarks for theoretical models of stellar feedback and its impact on galaxy evolution.</p>
             </div>
-            <div class="goal-card">
-                <h3>Cosmic Context</h3>
-                <p>Connect dwarf galaxy observations to broader questions about reionization, chemical evolution, and structure formation.</p>
+        </div>
+
+        <!-- Sample Description Subsection -->
+        <div class="sample-section">
+            <h3>Survey Sample</h3>
+            <p>The BRIDGES sample is carefully selected to provide a comprehensive view of dwarf galaxy physics across a range of environments and evolutionary states.</p>
+            
+            <div class="sample-grid">
+                <div class="sample-item">
+                    <h4>Stellar Mass</h4>
+                    <p>10<sup>7</sup> - 10<sup>9</sup> M<sub>☉</sub></p>
+                    <span class="sample-detail">Covering around SMC to LMC mass galaxies, where we expect low virial temperatures and the settling of cool ionized gas.</span>
+                </div>
+                
+                <div class="sample-item">
+                    <h4>Redshift</h4>
+                    <p>z &lt 0.01</p>
+                    <h4>Declination</h4>
+                    <p>-20° - 10°</p>
+                    <span class="sample-detail">Local Universe sample, visible Chile (Mothra) and Hawaii (Keck), enabling detailed CGM and internal galaxy characterization.</span>
+                </div>
+                
+                <div class="sample-item">
+                    <h4>Isolation Criteria</h4>
+                    <p>≥ 1.5 Mpc from massive (M<sub>*</sub> &gt 10<sup>9</sup>M<sub>☉</sub>) hosts</p>
+                    <span class="sample-detail">Ensuring halo gas has not been stripped as is expected in low mass satellite galaxies.</span>
+                </div>
+                
+                <div class="sample-item">
+                    <h4>Archival Data</h4>
+                    <p>Spatially resolved HI data</p>
+                    <span class="sample-detail">Gas rich galaxies where we can cross compare neutral and ionized gas components.</span>
+                </div>
             </div>
         </div>
+
     </section>
 
     <script>
-        // Intersection Observer for scroll-triggered animations
+        // Improved scroll-triggered animations with bidirectional support
         const layers = [
             { element: document.getElementById('layer-galaxy'), panel: document.getElementById('panel-galaxy') },
             { element: document.getElementById('layer-recycling'), panel: document.getElementById('panel-recycling') },
@@ -415,103 +506,81 @@
             { element: document.getElementById('layer-inflow'), panel: document.getElementById('panel-inflow') }
         ];
 
-        // Create trigger points for each layer
-        const triggers = [];
-        for (let i = 0; i < layers.length; i++) {
-            const trigger = document.createElement('div');
-            trigger.style.position = 'absolute';
-            trigger.style.top = `${(i + 1) * 18}%`; // 18% spacing to use more of the 800vh space
-            trigger.style.height = '10px';
-            trigger.style.width = '100%';
-            trigger.classList.add('trigger');
-            trigger.dataset.layerIndex = i;
-            document.querySelector('.visual-section').appendChild(trigger);
-            triggers.push(trigger);
+        let currentActiveIndex = -1;
+
+        function updateLayers() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const windowHeight = window.innerHeight;
+            const visualSection = document.querySelector('.visual-section');
+            const visualSectionTop = visualSection.offsetTop;
+            const visualSectionHeight = visualSection.offsetHeight;
+            
+            // Calculate relative scroll position within the visual section
+            const relativeScroll = scrollTop - visualSectionTop + windowHeight;
+            const sectionProgress = relativeScroll / visualSectionHeight;
+            
+            // More responsive trigger points with ranges for better bidirectional behavior
+            const triggerRanges = [
+                { start: 0.10, end: 0.30 },  // Galaxy
+                { start: 0.25, end: 0.45 },  // Recycling
+                { start: 0.40, end: 0.60 },  // Outflow
+                { start: 0.55, end: 0.75 },  // CGM
+                { start: 0.70, end: 0.95 }   // Inflow
+            ];
+            
+            let newActiveIndex = -1;
+            
+            // Find which layer should be active based on ranges
+            for (let i = 0; i < triggerRanges.length; i++) {
+                if (sectionProgress >= triggerRanges[i].start && sectionProgress <= triggerRanges[i].end) {
+                    newActiveIndex = i;
+                    break;
+                }
+            }
+            
+            // If we're past all ranges but still in the visual section, show the last layer
+            if (newActiveIndex === -1 && sectionProgress > triggerRanges[triggerRanges.length - 1].start && sectionProgress <= 1.0) {
+                newActiveIndex = triggerRanges.length - 1;
+            }
+            
+            // Always update layers and panels (not just when index changes)
+            // Hide all layers and panels first
+            layers.forEach((layer, index) => {
+                layer.element.classList.remove('visible');
+                layer.panel.classList.remove('visible');
+            });
+            
+            // Show layers up to and including the current one
+            if (newActiveIndex >= 0 && sectionProgress >= 0.1 && sectionProgress <= 1.0) {
+                for (let i = 0; i <= newActiveIndex; i++) {
+                    layers[i].element.classList.add('visible');
+                }
+                
+                // Show only the current panel
+                layers[newActiveIndex].panel.classList.add('visible');
+            }
+            
+            currentActiveIndex = newActiveIndex;
         }
 
-        // Intersection Observer setup
-        const observerOptions = {
-            root: null,
-            rootMargin: '-10% 0px -10% 0px', // Tighter margins for better reverse detection
-            threshold: 0
-        };
+        // Use requestAnimationFrame for smoother performance
+        let ticking = false;
+        
+        function onScroll() {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    updateLayers();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const layerIndex = parseInt(entry.target.dataset.layerIndex);
-                const layer = layers[layerIndex];
-                
-                if (entry.isIntersecting) {
-                    // Show layer and panel
-                    layer.element.classList.add('visible');
-                    
-                    // Hide all other panels
-                    layers.forEach((l, index) => {
-                        if (index !== layerIndex) {
-                            l.panel.classList.remove('visible');
-                        }
-                    });
-                    
-                    // Show current panel after a brief delay
-                    setTimeout(() => {
-                        layer.panel.classList.add('visible');
-                    }, 300);
-                }
-            });
-        }, observerOptions);
-
-        // Additional observer for reverse scrolling
-        const reverseObserverOptions = {
-            root: null,
-            rootMargin: '50% 0px 50% 0px', // Larger margins to catch reverse movement
-            threshold: 0
-        };
-
-        const reverseObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const layerIndex = parseInt(entry.target.dataset.layerIndex);
-                const layer = layers[layerIndex];
-                
-                if (!entry.isIntersecting) {
-                    // Check if we've scrolled past this trigger going up
-                    const triggerRect = entry.target.getBoundingClientRect();
-                    
-                    // If trigger is well below viewport, hide this layer
-                    if (triggerRect.top > window.innerHeight + 100) {
-                        layer.element.classList.remove('visible');
-                        layer.panel.classList.remove('visible');
-                    }
-                }
-            });
-        }, reverseObserverOptions);
-
-        // Create additional trigger for clearing panels when leaving visual section
-        const endTrigger = document.createElement('div');
-        endTrigger.style.position = 'absolute';
-        endTrigger.style.top = '95%';
-        endTrigger.style.height = '5%';
-        endTrigger.style.width = '100%';
-        document.querySelector('.visual-section').appendChild(endTrigger);
-
-        const endObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    // Hide all panels when leaving the visual section
-                    layers.forEach(layer => {
-                        layer.panel.classList.remove('visible');
-                    });
-                }
-            });
-        }, { threshold: 0 });
-
-        // Observe all trigger points with both observers
-        triggers.forEach(trigger => {
-            observer.observe(trigger);
-            reverseObserver.observe(trigger);
-        });
-
-        // Observe the end trigger
-        endObserver.observe(endTrigger);
+        // Add scroll listener
+        window.addEventListener('scroll', onScroll, { passive: true });
+        
+        // Initial call
+        updateLayers();
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
